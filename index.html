@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конфискат Трейд - продажа остатков и конфиската</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+    <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollToPlugin.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header :class="{ scrolled: isScrolled }">
+            <div class="container header-container">
+                <a href="#" class="logo">Travel<span>Cheap</span></a>
+                <button class="mobile-menu-btn" @click="toggleMobileMenu">☰</button>
+                <ul class="nav-links" :class="{ active: mobileMenuOpen }">
+                    <li><a href="#hero" @click="scrollToSection('hero')">Главная</a></li>
+                    <li><a href="#about" @click="scrollToSection('about')">О компании</a></li>
+                    <li><a href="#services" @click="scrollToSection('services')">Ассортимент</a></li>
+                    <li><a href="#portfolio" @click="scrollToSection('portfolio')">Кейсы</a></li>
+                    <!-- <li><a href="#partners" @click="scrollToSection('partners')">Партнеры</a></li> -->
+                    <li><a href="#contact" @click="scrollToSection('contact')">Контакты</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-bg"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Продажа остатков и конфиската</h1>
+                    <p class="hero-subtitle">Строительные материалы, техника, кабельная продукция, алкоголь, шины,
+                        автозапчасти и многое другое со скидкой до 80%</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn" @click="scrollToSection('contact')">Оставить заявку</a>
+                        <a href="#services" class="btn btn-outline" @click="scrollToSection('services')">Наш
+                            ассортимент</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section-with-shape">
+
+            <div class="container">
+                <h2 class="section-title">О компании</h2>
+                <div class="about-container">
+                    <div class="about-content">
+                        <p>Мы специализируемся на продаже остатков и конфиската различных товарных категорий, помогая
+                            нашим клиентам закупать качественные товары по минимальным ценам.</p>
+
+                        <div class="benefits">
+                            <div class="benefit-item">
+                                <div class="benefit-icon"><i class="fa-solid fa-suitcase"></i></div>
+                                <div>
+                                    <h4>Большой ассортимент</h4>
+                                    <p>Широкий выбор товаров от разных производителей</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon"><i class="fa-solid fa-rotate"></i></div>
+                                <div>
+                                    <h4>Постоянное обновление</h4>
+                                    <p>Регулярное пополнение остатков и конфиската</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon"><i class="fa-solid fa-percent"></i></div>
+                                <div>
+                                    <h4>Максимальные скидки</h4>
+                                    <p>Экономия до 80% от рыночной стоимости</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon"><i class="fa-solid fa-truck"></i></div>
+                                <div>
+                                    <h4>Быстрая доставка</h4>
+                                    <p>Оперативная отправка товаров по всей России</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Склад с товарами">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services section-with-shape">
+
+            <div class="container">
+                <h2 class="section-title">Наш ассортимент</h2>
+                <p>Мы предлагаем широкий выбор товаров различных категорий по выгодным ценам</p>
+
+                <div class="services-cards">
+                    <div class="service-card" v-for="(service, index) in services" :key="index"
+                        @mouseenter="cardHover(index)" @mouseleave="cardLeave(index)">
+                        <div class="service-icon" v-if="service.icon"><i :class="service.icon"></i></div>
+                        <h3>{{ service.title }}</h3>
+                        <p>{{ service.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio section-with-shape">
+
+            <div class="container">
+                <h2 class="section-title">Наши кейсы</h2>
+                <p>Примеры успешных поставок и реализованных проектов</p>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" v-for="(item, index) in portfolioItems" :key="index"
+                        @click="openModal(index)">
+                        <img :src="item.image" :alt="item.title" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.category }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" :class="{ open: modalOpen }">
+                    <div class="modal-content" v-if="modalOpen">
+                        <button class="modal-close" @click="closeModal">×</button>
+                        <h3>{{ currentPortfolio.title }}</h3>
+                        <p><strong>Категория:</strong> {{ currentPortfolio.category }}</p>
+                        <p><strong>Описание:</strong> {{ currentPortfolio.description }}</p>
+                        <p><strong>Результат:</strong> {{ currentPortfolio.result }}</p>
+                        <img :src="currentPortfolio.image" :alt="currentPortfolio.title"
+                            style="width: 100%; margin-top: 20px; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Partners Section
+        <section id="partners" class="partners section-with-shape">
+            
+            <div class="container">
+                <h2 class="section-title">Наши партнеры</h2>
+                <p>Мы сотрудничаем с ведущими производителями и поставщиками</p>
+
+                <div class="partners-carousel">
+                    <div class="partners-track">
+                        <img v-for="(partner, index) in partners" :key="index" :src="partner" class="partner-logo"
+                            :alt="'Партнер ' + (index + 1)">
+                        <img v-for="(partner, index) in partners" :key="index + partners.length" :src="partner"
+                            class="partner-logo" :alt="'Партнер ' + (index + 1)">
+                    </div>
+                </div>
+            </div>
+            
+        </section> -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-with-shape">
+
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <p>Свяжитесь с нами для получения актуального прайс-листа и консультации</p>
+
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h4>Адрес</h4>
+                                <p>г. Москва, ул. Складочная, д. 15, стр. 2</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                            <div>
+                                <h4>Телефон</h4>
+                                <p>+7 (495) 230-18-21</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@travel-cheap.ru</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h4>Оставьте заявку</h4>
+                        <form @submit.prevent="submitForm">
+                            <div class="form-group">
+                                <label class="form-label">Имя</label>
+                                <input type="text" class="form-input" v-model="formData.name" required>
+                                <div class="form-error">Пожалуйста, введите ваше имя</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Телефон</label>
+                                <input type="tel" class="form-input" v-model="formData.phone" required>
+                                <div class="form-error">Пожалуйста, введите ваш телефон</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" v-model="formData.email" required>
+                                <div class="form-error">Пожалуйста, введите корректный email</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Сообщение</label>
+                                <textarea class="form-input" rows="4" v-model="formData.message"></textarea>
+                            </div>
+                            <button type="submit" class="btn">Отправить заявку</button>
+                            <p class="text-muted">
+                                Нажимая кнопку отправить заявку вы соглашаетесь с обработкой персональных данных в
+                                соответствии с законом Российской Федерации</p>
+                        </form>
+                    </div>
+
+                    <div id="map">
+                        <iframe
+                            src="https://yandex.ru/map-widget/v1/?um=constructor%3A287e66cff1cc417a163978f173df5b0c09cad7fca2b3491f860cdc1626bda97e&amp;source=constructor"
+                            width="100%" height="400" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h4>TravelCheap</h4>
+                        <p>Продажа остатков и конфиската со скидкой до 80%.</p>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Категории товаров</h4>
+                        <ul class="footer-links">
+                            <li><a href="#services">Строительные материалы</a></li>
+                            <li><a href="#services">Кабельная продукция</a></li>
+                            <li><a href="#services">Техника и оборудование</a></li>
+                            <li><a href="#services">Алкогольная продукция</a></li>
+                            <li><a href="#services">Шины и автозапчасти</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Полезные ссылки</h4>
+                        <ul class="footer-links">
+                            <li><a href="#about">О компании</a></li>
+                            <li><a href="#contact">Доставка и оплата</a></li>
+                            <li><a href="#">Условия сотрудничества</a></li>
+                            <li><a href="#">Политика конфиденциальности</a></li>
+                            <li><a href="#">Частые вопросы</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Контакты</h4>
+                        <ul class="footer-links">
+                            <li>г. Москва, ул. Складочная, д. 15, стр. 2</li>
+                            <li>+7 (495) 230-18-21</li>
+                            <li>info@travel-cheap.ru</li>
+                            <li>Пн-Пт: 9:00 - 18:00</li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <p>&copy; 2025 Конфискат Трейд. Все права защищены.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="https://kit.fontawesome.com/88623b40ac.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
