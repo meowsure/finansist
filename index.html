@@ -1,300 +1,312 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="ru">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конфискат Трейд - продажа остатков и конфиската</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
-    <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollToPlugin.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Строй-Вер — современный лендинг</title>
+  <meta name="description" content="Строй-Вер — комплексные решения в строительстве и поставке материалов. Быстро, прозрачно, под ключ." />
+
+  <!-- Tailwind CDN (play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { accent: '#0ea5a0', 'accent-2':'#6ee7b7' }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg">
+  <!-- Vue 3 + GSAP -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js" defer></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 </head>
+<body class="bg-gray-50 text-slate-900 antialiased">
 
-<body>
-    <div id="app">
-        <!-- Header -->
-        <header :class="{ scrolled: isScrolled }">
-            <div class="container header-container">
-                <a href="#" class="logo">Конфискат<span>Трейд</span></a>
-                <button class="mobile-menu-btn" @click="toggleMobileMenu">☰</button>
-                <ul class="nav-links" :class="{ active: mobileMenuOpen }">
-                    <li><a href="#hero" @click="scrollToSection('hero')">Главная</a></li>
-                    <li><a href="#about" @click="scrollToSection('about')">О компании</a></li>
-                    <li><a href="#services" @click="scrollToSection('services')">Ассортимент</a></li>
-                    <li><a href="#portfolio" @click="scrollToSection('portfolio')">Кейсы</a></li>
-                    <!-- <li><a href="#partners" @click="scrollToSection('partners')">Партнеры</a></li> -->
-                    <li><a href="#contact" @click="scrollToSection('contact')">Контакты</a></li>
-                </ul>
-            </div>
-        </header>
+<div id="app">
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3" aria-label="Строй-Вер — Главная">
+        <img src="assets/icons/favicon.svg" class="w-11 h-11 rounded-xl shadow" alt="SV"/>
+        <div class="leading-tight">
+          <div class="font-semibold">Строй-Вер</div>
+          <div class="text-xs text-slate-500">Строительство • Снабжение</div>
+        </div>
+      </a>
 
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="hero-bg"></div>
-            <div class="floating-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-            </div>
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Продажа остатков и конфиската</h1>
-                    <p class="hero-subtitle">Строительные материалы, техника, кабельная продукция, алкоголь, шины,
-                        автозапчасти и многое другое со скидкой до 80%</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn" @click="scrollToSection('contact')">Оставить заявку</a>
-                        <a href="#services" class="btn btn-outline" @click="scrollToSection('services')">Наш
-                            ассортимент</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <nav class="hidden md:flex gap-6 items-center">
+        <a href="#about" class="text-sm text-slate-700 hover:text-accent transition">О компании</a>
+        <a href="#services" class="text-sm text-slate-700 hover:text-accent transition">Услуги</a>
+        <a href="#portfolio" class="text-sm text-slate-700 hover:text-accent transition">Портфолио</a>
+        <a href="#contacts" class="text-sm text-slate-700 hover:text-accent transition">Контакты</a>
+        <a href="#contacts" class="ml-3 inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-xl shadow hover:brightness-95 transition">Связаться</a>
+      </nav>
 
-        <!-- About Section -->
-        <section id="about" class="about section-with-shape">
-
-            <div class="container">
-                <h2 class="section-title">О компании</h2>
-                <div class="about-container">
-                    <div class="about-content">
-                        <p>Мы специализируемся на продаже остатков и конфиската различных товарных категорий, помогая
-                            нашим клиентам закупать качественные товары по минимальным ценам.</p>
-
-                        <div class="benefits">
-                            <div class="benefit-item">
-                                <div class="benefit-icon"><i class="fa-solid fa-suitcase"></i></div>
-                                <div>
-                                    <h4>Большой ассортимент</h4>
-                                    <p>Широкий выбор товаров от разных производителей</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon"><i class="fa-solid fa-rotate"></i></div>
-                                <div>
-                                    <h4>Постоянное обновление</h4>
-                                    <p>Регулярное пополнение остатков и конфиската</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon"><i class="fa-solid fa-percent"></i></div>
-                                <div>
-                                    <h4>Максимальные скидки</h4>
-                                    <p>Экономия до 80% от рыночной стоимости</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon"><i class="fa-solid fa-truck"></i></div>
-                                <div>
-                                    <h4>Быстрая доставка</h4>
-                                    <p>Оперативная отправка товаров по всей России</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-image">
-                        <img src="https://plus.unsplash.com/premium_photo-1678283974882-a00a67c542a9?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt="Склад с товарами">
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="services section-with-shape">
-
-            <div class="container">
-                <h2 class="section-title">Наш ассортимент</h2>
-                <p>Мы предлагаем широкий выбор товаров различных категорий по выгодным ценам</p>
-
-                <div class="services-cards">
-                    <div class="service-card" v-for="(service, index) in services" :key="index"
-                        @mouseenter="cardHover(index)" @mouseleave="cardLeave(index)">
-                        <div class="service-icon" v-if="service.icon"><i :class="service.icon"></i></div>
-                        <h3>{{ service.title }}</h3>
-                        <p>{{ service.description }}</p>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio section-with-shape">
-
-            <div class="container">
-                <h2 class="section-title">Наши кейсы</h2>
-                <p>Примеры успешных поставок и реализованных проектов</p>
-
-                <div class="portfolio-grid">
-                    <div class="portfolio-item" v-for="(item, index) in portfolioItems" :key="index"
-                        @click="openModal(index)">
-                        <img :src="item.image" :alt="item.title" class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>{{ item.title }}</h3>
-                            <p>{{ item.category }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal" :class="{ open: modalOpen }">
-                    <div class="modal-content" v-if="modalOpen">
-                        <button class="modal-close" @click="closeModal">×</button>
-                        <h3>{{ currentPortfolio.title }}</h3>
-                        <p><strong>Категория:</strong> {{ currentPortfolio.category }}</p>
-                        <p><strong>Описание:</strong> {{ currentPortfolio.description }}</p>
-                        <p><strong>Результат:</strong> {{ currentPortfolio.result }}</p>
-                        <img :src="currentPortfolio.image" :alt="currentPortfolio.title"
-                            style="width: 100%; margin-top: 20px; border-radius: 8px;">
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Partners Section
-        <section id="partners" class="partners section-with-shape">
-            
-            <div class="container">
-                <h2 class="section-title">Наши партнеры</h2>
-                <p>Мы сотрудничаем с ведущими производителями и поставщиками</p>
-
-                <div class="partners-carousel">
-                    <div class="partners-track">
-                        <img v-for="(partner, index) in partners" :key="index" :src="partner" class="partner-logo"
-                            :alt="'Партнер ' + (index + 1)">
-                        <img v-for="(partner, index) in partners" :key="index + partners.length" :src="partner"
-                            class="partner-logo" :alt="'Партнер ' + (index + 1)">
-                    </div>
-                </div>
-            </div>
-            
-        </section> -->
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact section-with-shape">
-
-            <div class="container">
-                <h2 class="section-title">Контакты</h2>
-                <p>Свяжитесь с нами для получения актуального прайс-листа и консультации</p>
-
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-                            <div>
-                                <h4>Адрес</h4>
-                                <p>г. Москва, ул. Складочная, д. 15, стр. 2</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fa-solid fa-phone-volume"></i></div>
-                            <div>
-                                <h4>Телефон</h4>
-                                <p>+7 (495) 230-18-21</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@finansist-trade.ru</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="contact-form">
-                        <h4>Оставьте заявку</h4>
-                        <form @submit.prevent="submitForm">
-                            <div class="form-group">
-                                <label class="form-label">Имя</label>
-                                <input type="text" class="form-input" v-model="formData.name" required>
-                                <div class="form-error">Пожалуйста, введите ваше имя</div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Телефон</label>
-                                <input type="tel" class="form-input" v-model="formData.phone" required>
-                                <div class="form-error">Пожалуйста, введите ваш телефон</div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-input" v-model="formData.email" required>
-                                <div class="form-error">Пожалуйста, введите корректный email</div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Сообщение</label>
-                                <textarea class="form-input" rows="4" v-model="formData.message"></textarea>
-                            </div>
-                            <button type="submit" class="btn">Отправить заявку</button>
-                            <p class="text-muted">
-                                Нажимая кнопку отправить заявку вы соглашаетесь с обработкой персональных данных в
-                                соответствии с законом Российской Федерации</p>
-                        </form>
-                    </div>
-
-                    <div id="map">
-                        <iframe
-                            src="https://yandex.ru/map-widget/v1/?um=constructor%3A287e66cff1cc417a163978f173df5b0c09cad7fca2b3491f860cdc1626bda97e&amp;source=constructor"
-                            width="100%" height="400" frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-container">
-                    <div class="footer-col">
-                        <h4>КонфискатТрейд</h4>
-                        <p>Продажа остатков и конфиската со скидкой до 80%.</p>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4>Категории товаров</h4>
-                        <ul class="footer-links">
-                            <li><a href="#services">Строительные материалы</a></li>
-                            <li><a href="#services">Кабельная продукция</a></li>
-                            <li><a href="#services">Техника и оборудование</a></li>
-                            <li><a href="#services">Алкогольная продукция</a></li>
-                            <li><a href="#services">Шины и автозапчасти</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4>Полезные ссылки</h4>
-                        <ul class="footer-links">
-                            <li><a href="#about">О компании</a></li>
-                            <li><a href="#contact">Доставка и оплата</a></li>
-                            <li><a href="#">Условия сотрудничества</a></li>
-                            <li><a href="#">Политика конфиденциальности</a></li>
-                            <li><a href="#">Частые вопросы</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4>Контакты</h4>
-                        <ul class="footer-links">
-                            <li>г. Москва, ул. Складочная, д. 15, стр. 2</li>
-                            <li>+7 (495) 230-18-21</li>
-                            <li>info@finansist-trade.ru</li>
-                            <li>Пн-Пт: 9:00 - 18:00</li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-bottom">
-                        <p>&copy; 2025 Конфискат Трейд. Все права защищены.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+      <!-- Mobile burger -->
+      <div class="md:hidden">
+        <button @click="mobile = !mobile" aria-label="Открыть меню" class="p-2 rounded-lg bg-white shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
 
-    <script src="main.js"></script>
-    <script src="https://kit.fontawesome.com/88623b40ac.js" crossorigin="anonymous"></script>
-</body>
+    <!-- Mobile menu -->
+    <div v-show="mobile" class="md:hidden border-t border-slate-100 bg-white/95">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <a href="#about" @click="mobile=false" class="py-2">О компании</a>
+        <a href="#services" @click="mobile=false" class="py-2">Услуги</a>
+        <a href="#portfolio" @click="mobile=false" class="py-2">Портфолио</a>
+        <a href="#contacts" @click="mobile=false" class="py-2">Контакты</a>
+      </div>
+    </div>
+  </header>
 
+  <main class="pt-28">
+    <!-- HERO -->
+    <section id="hero" class="relative overflow-hidden">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div class="reveal">
+            <p class="text-accent font-semibold">Строй-Вер</p>
+            <h1 class="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">Строим и снабжаем — проекты «под ключ» с надёжностью и прозрачностью.</h1>
+            <p class="mt-4 text-slate-600 max-w-xl">Мы ведём проекты от идеи до сдачи: проектирование, поставки материалов и выполнение строительно-монтажных работ. Гарантируем честные сроки и прозрачное взаимодействие.</p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#contacts" class="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-xl shadow">Связаться с нами</a>
+              <button @click="scrollTo('#portfolio')" class="px-4 py-2 rounded-xl border border-slate-200">Посмотреть портфолио</button>
+            </div>
+
+            <div class="mt-8 grid grid-cols-3 gap-3 max-w-lg">
+              <div class="bg-white/80 rounded-xl p-3 shadow-sm">
+                <div class="font-semibold">Склад и логистика</div>
+                <div class="text-xs text-slate-500">Собственное хранение и быстрая комплектация.</div>
+              </div>
+              <div class="bg-white/80 rounded-xl p-3 shadow-sm">
+                <div class="font-semibold">Надёжные материалы</div>
+                <div class="text-xs text-slate-500">Поставки от проверенных производителей.</div>
+              </div>
+              <div class="bg-white/80 rounded-xl p-3 shadow-sm">
+                <div class="font-semibold">Профессиональная команда</div>
+                <div class="text-xs text-slate-500">Инженеры и строители с опытом.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative reveal">
+            <div class="rounded-2xl bg-white shadow-lg p-6 will-change-transform">
+              <div class="w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden bg-gradient-to-br from-accent/10 to-accent-2/10 flex items-center justify-center">
+                <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-95">
+                  <rect x="12" y="40" width="80" height="150" rx="8" fill="#e6fffa"/>
+                  <rect x="110" y="20" width="90" height="170" rx="8" fill="#baf7e7"/>
+                </svg>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-3">
+                <div class="text-sm text-slate-600">Готовые решения «под ключ»</div>
+                <div class="text-sm text-slate-600">Честные сроки и прозрачная смета</div>
+              </div>
+            </div>
+
+            <div class="absolute -left-6 -top-6 w-24 h-24 rounded-full bg-accent/10 blur-2xl pointer-events-none"></div>
+            <div class="absolute -right-6 bottom-6 w-36 h-36 rounded-full bg-sky-100 blur-3xl pointer-events-none"></div>
+
+            <div class="absolute right-6 top-6 text-3xl emoji-big">🏗️</div>
+            <div class="absolute left-12 bottom-12 text-2xl emoji-small">📦</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / SERVICES -->
+    <section id="about" class="mt-16 py-12 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="reveal">
+            <h2 class="text-2xl font-bold">Кто мы</h2>
+            <p class="mt-3 text-slate-600 max-w-xl">Строй-Вер — команда специалистов в строительстве и поставках. Мы комбинируем опыт, современные технологии и проверенных поставщиков, чтобы предложить комплексные и безопасные решения для вашего проекта.</p>
+
+            <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-600">
+              <li>• Собственный склад и логистика</li>
+              <li>• Проверенные материалы от лидеров рынка</li>
+              <li>• Профессиональная команда инженеров и строителей</li>
+              <li>• Честные сроки и прозрачные условия</li>
+            </ul>
+          </div>
+
+          <div class="reveal">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-semibold">Строительство</h3>
+                <p class="text-sm text-slate-500">Жилые дома, офисы, промышленные объекты — полный цикл работ.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-semibold">Комплектация</h3>
+                <p class="text-sm text-slate-500">Поставка стройматериалов согласно требованиям проекта.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-semibold">Поддержка проектов</h3>
+                <p class="text-sm text-slate-500">Технические консультации, расчёты и подбор материалов.</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-semibold">Материалы</h3>
+                <p class="text-sm text-slate-500">Бетон, кирпичи, кровля, гипсокартон и инженерные системы.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="mt-16 py-12">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between">
+          <div class="reveal">
+            <h2 class="text-2xl font-bold">Наши работы</h2>
+            <p class="mt-2 text-slate-600">Примеры завершённых проектов. Нажмите на карточку для деталей.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article v-for="p in portfolio" :key="p.id" class="card group bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition will-change-transform cursor-pointer reveal" @click="openModal(p)">
+            <img :src="p.img" alt="" class="w-full h-48 object-cover transition-transform group-hover:scale-105"/>
+            <div class="p-4">
+              <div class="font-semibold">{{p.title}}</div>
+              <div class="text-sm text-slate-500 mt-1">{{p.date}} • {{p.type}}</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Modal -->
+        <div v-if="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" @click.self="closeModal">
+          <div class="bg-white rounded-xl w-full max-w-4xl mx-4 p-6 overflow-auto max-h-[90vh]">
+            <div class="flex justify-between items-start gap-4">
+              <div>
+                <h3 class="text-xl font-bold">{{current.title}}</h3>
+                <p class="text-sm text-slate-500">{{current.date}} • {{current.type}}</p>
+              </div>
+              <button @click="closeModal" class="text-slate-500">✕</button>
+            </div>
+
+            <div class="mt-4 grid md:grid-cols-2 gap-4">
+              <img :src="current.img" alt="" class="w-full h-64 object-cover rounded-lg"/>
+              <div class="text-slate-600">
+                <p>Краткое описание проекта — использованные материалы, ключевые решения и сроки выполнения. По запросу подготовим полный кейс.</p>
+                <ul class="mt-3 text-sm text-slate-500">
+                  <li>Год: {{current.year}}</li>
+                  <li>Роль: Генеральный подряд</li>
+                  <li>Особенности: Быстрая комплектация, собственный склад</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="contacts" class="mt-16 py-12 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+          <div class="reveal">
+            <h2 class="text-2xl font-bold">Контакты</h2>
+            <p class="mt-3 text-slate-600">Оставьте заявку, и мы перезвоним вам в течение дня.</p>
+
+            <div class="mt-4 bg-gray-50 p-4 rounded-xl shadow">
+              <p class="text-sm"><strong>Адрес:</strong> г. Москва, ул. Промышленная, д. 12</p>
+              <p class="text-sm mt-1"><strong>Телефон:</strong> +7 (495) 230-24-42</p>
+              <p class="text-sm mt-1"><strong>E-mail:</strong> info@stroy-ver.ru</p>
+            </div>
+
+            <div class="mt-4 rounded-xl overflow-hidden">
+              <iframe title="map" src="https://yandex.ru/map-widget/v1/?um=constructor%3A63996fb2ca2fb989b0f4379bcc27b4a0c1441dc3ad57b68cd6ea11611d1ebbba&amp;source=constructor" class="w-full h-64 border-0"></iframe>
+            </div>
+
+            <h2 class="mt-4 text-2xl font-bold">Реквизиты компании</h2>
+            <p class="mt-3 text-slate-600">Ниже расположены реквизиты нашей компании</p>
+          </div>
+
+          <form @submit.prevent="submitForm" class="bg-gray-50 p-6 rounded-xl shadow reveal">
+            <div class="grid grid-cols-1 gap-4">
+              <label class="block">
+                <span class="text-sm text-slate-700">Имя</span>
+                <input v-model="form.name" required minlength="2" class="mt-1 block w-full rounded-lg border border-slate-200 px-3 py-2" />
+              </label>
+
+              <label class="block">
+                <span class="text-sm text-slate-700">Телефон</span>
+                <input v-model="form.phone" required pattern="[+0-9 ()-]{6,}" class="mt-1 block w-full rounded-lg border border-slate-200 px-3 py-2" />
+              </label>
+
+              <label class="block">
+                <span class="text-sm text-slate-700">E-mail</span>
+                <input v-model="form.email" type="email" required class="mt-1 block w-full rounded-lg border border-slate-200 px-3 py-2" />
+              </label>
+
+              <label class="block">
+                <span class="text-sm text-slate-700">Сообщение</span>
+                <textarea v-model="form.msg" required rows="4" class="mt-1 block w-full rounded-lg border border-slate-200 px-3 py-2"></textarea>
+              </label>
+
+              <div class="flex items-center gap-3">
+                <button type="submit" class="bg-accent text-white px-4 py-2 rounded-xl shadow">Отправить</button>
+                <div class="text-sm text-slate-500">Мы перезвоним в течение дня</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 py-12 bg-gray-50 border-t border-slate-100">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="reveal">
+            <h4 class="font-semibold">Строй-Вер</h4>
+            <p class="text-sm text-slate-500 mt-2">Строительство и комплексная поставка материалов — надёжно и прозрачно.</p>
+          </div>
+
+          <div class="reveal">
+            <h5 class="font-semibold">Услуги</h5>
+            <ul class="mt-3 text-sm text-slate-500">
+              <li>Строительство</li>
+              <li>Комплектация</li>
+              <li>Поддержка проектов</li>
+            </ul>
+          </div>
+
+          <div class="reveal">
+            <h5 class="font-semibold">Материалы</h5>
+            <ul class="mt-3 text-sm text-slate-500">
+              <li>Бетон и сухие смеси</li>
+              <li>Кирпич, блоки, ЖБИ</li>
+              <li>Кровельные материалы</li>
+            </ul>
+          </div>
+
+          <div class="reveal">
+            <h5 class="font-semibold">Контакты</h5>
+            <div class="text-sm text-slate-500 mt-3">+7 (495) 230-24-42<br/>info@stroy-ver.ru</div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex items-center justify-between text-sm text-slate-500">
+          <div>© Строй-Вер — Все права защищены</div>
+          <div>Политика конфиденциальности • Условия</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<!-- App JS -->
+<script src="/js/app.js" defer></script>
+</body>
 </html>
