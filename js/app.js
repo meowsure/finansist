@@ -59,8 +59,17 @@ window.addEventListener('DOMContentLoaded', () => {
             "date": "2025",
             "year": 2025,
             "type": "Коммерческий",
-            "img": "https://images.unsplash.com/photo-1711910382806-d341dcdd656f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "img": "https://images.unsplash.com/photo-1565262353342-6e919eab5b58?q=80&w=2532&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "description": "Крупномасштабный проект многофункционального общественно-делового центра, объединяющего в себе ритейл-пространства, премиальные офисы, апартаменты и общественную зону. Уникальная архитектура здания станет новой точкой притяжения в городе. При проектировании особый упор сделан на создание бесшовной и комфортной среды для работы, жизни и отдыха. В настоящее время ведутся активные строительные работы, полное завершение проекта запланировано на 2025 год."
+          },
+          {
+            "id": 7,
+            "title": "Ремонт гостиниц и санаториев",
+            "date": "2025",
+            "year": 2025,
+            "type": "Коммерческий",
+            "img": "https://images.unsplash.com/photo-1629078691977-dc51747c0263?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "description": "В настоящее время ведутся активные строительные работы, полное завершение проекта запланировано на 2026 год."
           }
         ],
         modalOpen: false,
